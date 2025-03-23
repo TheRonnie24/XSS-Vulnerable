@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XSS Vulnerable Page</title>
+</head>
+<body>
+    <h2>Comment Section</h2>
+    <form method="GET">
+        <input type="text" name="comment" placeholder="Enter your comment">
+        <button type="submit">Submit</button>
+    </form>
+    <h3>Previous Comments:</h3>
+    <p>
+        <!-- Vulnerability: Directly inserting user input into the page without sanitization -->
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            document.write(params.get("comment"));
+        </script>
+    </p>
+</body>
+</html>
